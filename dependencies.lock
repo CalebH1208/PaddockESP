@@ -1,0 +1,22 @@
+dependencies:
+  Carbon225/esp-perfmon:
+    component_hash: 80baedb9571e8960f5f92031680fd65bc84032688fea13366771321316fe1477
+    source:
+      git: https://github.com/Carbon225/esp32-perfmon.git
+      path: .
+      type: git
+    version: 913b5d1cd7399894baf554966c2f57257811e1b7
+  idf:
+    component_hash: null
+    source:
+      type: idf
+    version: 5.2.1
+  jgromes/RadioLib:
+    component_hash: c1975c19b72a8d78fc1220d1629382a7808c8b6d0e31906b30f53f4b37f9cb78
+    source:
+      service_url: https://api.components.espressif.com/
+      type: service
+    version: 6.5.0
+manifest_hash: 1daa969f629427afd7e5655e3b5ee0864d2ae3b8f70864247b84ee2772c25391
+target: esp32
+version: 1.0.0
