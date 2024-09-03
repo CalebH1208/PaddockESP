@@ -18,8 +18,8 @@
 EspHal* hal = new EspHal(SCK, MISO, MOSI);
 
 #define NSS 5
-#define DIO0 2
-  #define NRST 14
+#define DIO0 32
+#define NRST 27
 #define DIO1 34
 
 //comment out this line for IC firmware other wise leave for EV firmware
