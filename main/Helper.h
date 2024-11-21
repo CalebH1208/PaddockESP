@@ -1,13 +1,35 @@
 #include <stdlib.h>
+#include <math.h>
 #include "can.h"
 #include "ESPHal.h"
 
-#define LoRa_PACKET_LENGTH 52
+extern int testvalue =0;
 
-typedef struct dataC_t dataContainer;
+#define LoRa_PACKET_LENGTH 52  // Length of incoming LoRa packet
+
+typedef struct dataC_t {
+    int length;
+    int *dataArray;
+} dataContainer;
+
+typedef struct {
+    RFM96* radio;
+    dataContainer* data;
+} passVariables;
+
+typedef struct {
+    uint16_t minutes;
+    uint8_t seconds;
+    uint64_t microSeconds;
+    uint16_t lap;
+} lapDataContainer;
+
+typedef struct {
+    dataContainer* ICData;
+    dataContainer* EVData;
+    lapDataContainer* lapData;
+} multiReciever;
 
 dataContainer CreateDataContainer(int length);
 void freeDataContainer(dataContainer);
-int updateArray(twai_message_t message,dataContainer* DataArray);
-int LoRaSend(dataContainer DataArray,RFM96);
-void updateData(RFM96 radio,dataContainer* Data);
+void updateData(RFM96 radio, multiReciever* TotalData);

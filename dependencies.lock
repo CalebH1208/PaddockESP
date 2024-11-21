@@ -10,13 +10,13 @@ dependencies:
     component_hash: null
     source:
       type: idf
-    version: 5.2.1
+    version: 5.1.4
   jgromes/RadioLib:
-    component_hash: c1975c19b72a8d78fc1220d1629382a7808c8b6d0e31906b30f53f4b37f9cb78
+    component_hash: a5250de30ec5cb42954d27b6b7e08e35623f9e094042a0698b61d8c02740f689
     source:
       service_url: https://api.components.espressif.com/
       type: service
-    version: 6.5.0
-manifest_hash: 1daa969f629427afd7e5655e3b5ee0864d2ae3b8f70864247b84ee2772c25391
+    version: 6.6.0
+manifest_hash: 531ade6f05c321545e77d58504186687313512ae85fd296ddba8716ed547a7a5
 target: esp32
 version: 1.0.0

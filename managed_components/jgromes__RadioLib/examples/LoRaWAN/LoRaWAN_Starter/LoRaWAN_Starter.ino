@@ -26,37 +26,40 @@
 
 void setup() {
   Serial.begin(115200);
-  while (!Serial);
+  while(!Serial);
   delay(5000);  // Give time to switch to the serial monitor
   Serial.println(F("\nSetup ... "));
 
-  Serial.println(F("Initalise the radio"));
-  int state = radio.begin();
-  debug(state != RADIOLIB_ERR_NONE, F("Initalise radio failed"), state, true);
+  Serial.println(F("Initialise the radio"));
+  int16_t state = radio.begin();
+  debug(state != RADIOLIB_ERR_NONE, F("Initialise radio failed"), state, true);
 
-  Serial.println(F("Join ('login') to the LoRaWAN Network"));
-  state = node.beginOTAA(joinEUI, devEUI, nwkKey, appKey, true);
-  debug(state < RADIOLIB_ERR_NONE, F("Join failed"), state, true);
+  // Setup the OTAA session information
+  node.beginOTAA(joinEUI, devEUI, nwkKey, appKey);
+
+  Serial.println(F("Join ('login') the LoRaWAN Network"));
+  state = node.activateOTAA();
+  debug(state != RADIOLIB_LORAWAN_NEW_SESSION, F("Join failed"), state, true);
 
   Serial.println(F("Ready!\n"));
 }
 
-
 void loop() {
   Serial.println(F("Sending uplink"));
 
-  // Read some inputs
-  uint8_t Digital1 = digitalRead(2);
-  uint16_t Analog1 = analogRead(3);
+  // This is the place to gather the sensor inputs
+  // Instead of reading any real sensor, we just generate some random numbers as example
+  uint8_t value1 = radio.random(100);
+  uint16_t value2 = radio.random(2000);
 
   // Build payload byte array
   uint8_t uplinkPayload[3];
-  uplinkPayload[0] = Digital1;
-  uplinkPayload[1] = highByte(Analog1);   // See notes for high/lowByte functions
-  uplinkPayload[2] = lowByte(Analog1);
+  uplinkPayload[0] = value1;
+  uplinkPayload[1] = highByte(value2);   // See notes for high/lowByte functions
+  uplinkPayload[2] = lowByte(value2);
   
   // Perform an uplink
-  int state = node.sendReceive(uplinkPayload, sizeof(uplinkPayload));    
+  int16_t state = node.sendReceive(uplinkPayload, sizeof(uplinkPayload));    
   debug((state != RADIOLIB_LORAWAN_NO_DOWNLINK) && (state != RADIOLIB_ERR_NONE), F("Error in sendReceive"), state, false);
 
   Serial.print(F("Uplink complete, next in "));

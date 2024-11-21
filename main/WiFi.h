@@ -9,8 +9,8 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
-#define SSID      "CAN is Bussin"
-#define PASS      "squiggles"
+#define SSID      "CANs is Bussin"
+#define PASS      "squigglen"
 #define CHAN  1
 #define MAXC       4
 

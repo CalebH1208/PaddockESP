@@ -1,4 +1,3 @@
-#include "ESPHal.h"
 #include "driver/twai.h"
 
 static void configure_CAN();
